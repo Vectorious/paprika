@@ -1,0 +1,203 @@
+        <!DOCTYPE html">
+        <html lang="en">
+            <head>
+                <title>Salty Bet</title>
+                <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+                <meta name="description" content="Salty Bet allows you to place bets on live competitive events." />
+                <meta name="keywords" content="salty bet, salty bets, fighting games, video game stream, twitch tv, mugen, betting game">
+                <meta property="og:description" content="Salty Bet allows you to place bets on live competitive events." /> 
+                <meta property="og:title" content="Salty Bet"/>
+                <meta property="og:image" content="https://www.saltybet.com/images/SALTYBETgraph.png"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <link type="text/css" href="../css/jquery-ui-1.11.min.css" rel="stylesheet" />
+                <link type="text/css" href="../css/bootstrap-theme.min.css" rel="stylesheet" />
+                <link type="text/css" href="../css/bootstrap.min.css" rel="stylesheet" />
+                <script src="../j/jquery-2.1.1.min.js" type="text/javascript"></script>
+                <link rel="stylesheet" type="text/css" href="../css/master.css"/>                <link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+                <script type="text/javascript" src="../j/jquery-ui-1.11.min.js"></script>
+                <script type="text/javascript" src="../j/jquery.validate-1.13.min.js"></script>
+                <script type="text/javascript" src="../j/ajax_forms_script.js"></script>
+                <script type="text/javascript" src="../j/bootstrap.min.js"></script>
+                <script type="text/javascript">
+                var wsConnection = "https://www.saltybet.com:2096";var liveApp = "";                </script>
+                <script>
+  (function(i,s,o,g,r,a,m){{i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){{
+  (i[r].q=i[r].q||[]).push(arguments)}},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  }})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-40611156-1', 'saltybet.com');
+  ga('send', 'pageview');
+
+</script>            </head>
+            <body >
+            <!-- Begin Wrapper -->
+            <div id="wrapper">
+                
+        <!-- Begin Header/Navigation -->
+            <nav id="header" class="navbar navbar-default navbar-fixed-top">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="https://www.saltybet.com/">
+                            <img class="sbimg" alt="SB" src="../images/SALTYBETheader3.png">
+                        </a>
+                    </div>
+                    
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                                                                                    <li class="nav-image"><h2><span class="nomargin"></span><span id="rank" class="nomargin"><img src="../images/ranksmall/rank21.png" class="levelimage"></span>
+                                    <span class="navbar-text">{name} [<span id="betStreak" class="greentext">2</span>] #<span id="leaderboardRank">2,022</span> </span></h2></li>
+
+                            <li class="nav-glyph"  >
+                                        <div class="dropdown">
+            <span class="glyphicon glyphicon-cog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="position:static;"></span>
+                <ul class="dropdown-menu" aria-labelledby="Options">
+                                        
+                                            <li><a href="https://www.saltybet.com/options" target="_blank"><span class="glyphicon glyphicon-cog"></span> Options</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li> <a href="https://www.saltybet.com/bank" target="_blank" ><span class="glyphicon glyphicon-globe"></span> Bank</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-header"style="color:darkgoldenrod;" >Salty Gold</li>
+                        <li> <a style="color:darkgoldenrod;" href="https://www.saltybet.com/stats" target="_blank" ><span class="glyphicon glyphicon-stats"></span> Stats</a></li>
+                        <li> <a style="color:darkgoldenrod;" href="https://www.saltybet.com/shaker" target="_blank" ><span class="glyphicon glyphicon-calendar"></span> Shaker</a></li>
+                        <li> <a style="color:darkgoldenrod;" href="https://www.saltybet.com/compendium" target="_blank" ><span class="glyphicon glyphicon-book"></span> Compendium</a></li>
+                        
+                        <li> <a style="color: rgb(112, 0, 255);"  href="https://www.saltybet.com/waifu" target="_blank" ><img src="/images/wwoicon2.png" style="width: 14px;"/> WAIFU WARS</a></li>
+                        
+                        
+                        <li role="separator" class="divider"></li>
+                        <!--<li class="dropdown-header">Select Betting Server</li>
+                        <li><a href="http://mugen.saltybet.com">Switch to M.U.G.E.N</a></li>
+                        <li><a href="https://live.saltybet.com">Switch to LIVE</a></li>
+                        <li role="separator" class="divider"></li>-->
+                                        <li class="dropdown-header">Theme</li>
+                    <li><a id="lighttheme" href="#">Light Mode</a></li>
+                    <li><a id="darktheme" href="#">Dark Mode</a></li>
+                </ul>
+        </div>
+                                    </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        <!-- End Header/Navigation -->
+                    
+            <div id="sbettorswrapper" class="sidebar-view">
+                <div id="sbettors1"></div>
+                <div id="sbettors2"></div>
+            </div>
+            <div id="stream">
+                                    <div id="video-embed">
+                        <iframe id="iframeplayer" src="https://player.twitch.tv/?channel=saltybet&parent=www.saltybet.com" frameborder="0" scrolling="no" height="100%" width="100%" allowfullscreen="true"></iframe>
+                    </div>
+                           </div>
+            <div id="chat-wrapper" class="sidebar-view">
+                <!--<div style="padding: 20px;">Twitch chat embed is currently down. <br/><br/> <a href="http://www.twitch.tv/saltybet/chat?popout" target="_blank">Click here to open chat in a new tab.</a></div>-->
+                <iframe id="chat-frame-stream" width="325"  frameborder="0" scrolling="no" class="chat_embed" src="https://twitch.tv/embed/saltybet/chat?parent=www.saltybet.com&darkpopout"></iframe>
+            </div>          
+                    <div id="bottomcontent">
+            
+            <div id="status">
+                <span>&nbsp;</span>
+                <span id="betstatus">Waiting for the next match.</span>
+                <span>&nbsp;</span>
+                <input type="hidden" id="u" name="u" value ="{user_id}" />
+                <input type="hidden" id="b" name="b" value ="{balance}" />
+                <input type="hidden" id="g" name="g" value ="0" />
+                <input type="hidden" id="i" name="i" value ="0" />
+                <input type="hidden" id="m" name="m" value ="0" />
+            </div>
+            
+            <form id="fightcard" name="fightcard">
+                <input type="hidden" id="selectedplayer" name="selectedplayer" />
+                        <div id ="balancewrapper">
+                            <span class="dollar greentext" >$<span class="dollar" id="balance">{balance:,}</span></span> <span class="dynamic-view greentext">&nbsp;&rarr;&nbsp;</span><input type="text" name="wager" id="wager" placeholder="Wager" class="dynamic-view"/>                        </div>
+
+                        <div id="bet-table">
+                            
+                            <div class="dynamic-view tablecell">
+                                <span class="submit" >
+                                    <input id="player1" name="player1" type="submit" value="" class="betbuttonred" disabled="disabled"/>
+                                </span>
+                            </div>
+                            
+                            <div class="center-hud tablecell">
+                                <ul>
+                                    <li class="menu"><span id="odds" class="dynamic-view"></span></li>
+                                    <li class="menu"><span id="lastbet" class="dynamic-view"></span></li>
+                                </ul>
+                            </div>
+                            
+                            <div class="dynamic-view tablecell">
+                                <span class="submit" >
+                                    <input id="player2" name="player2" type="submit" value="" class="betbuttonblue" disabled="disabled"/>
+                                </span>
+                            </div>
+                            
+                        </div>
+                        
+            </form>
+        </div>
+
+        <div><script src="https://www.saltybet.com:2096/socket.io/socket.io.js"></script><script src="../j/www-cdn-jtvnw-x.js"></script></div>        <script>
+            jQuery(function() {{
+                                    $('#sbettorswrapper').css('background-color','#19191f');
+                    $('#sbettorswrapper').css('color','rgb(191, 191, 191)');
+                                function setAspectRatio() {{
+                  jQuery('#stream').each(function() {{
+                    jQuery(this).css('max-width',$(window).width() - 600);
+                    jQuery(this).css('width',jQuery(this).height()*(4/3));
+                  }});
+                    $('.sidebar-view').css('width',(($('body').width()-$('#video-embed').width())/2));
+                    $('#sbettors1, #sbettors2').css('width',(($('#sbettorswrapper').width())/2 - 11));
+                    
+                    $('#stream').css('left',($('#sbettorswrapper').width()));
+                    $('#stream').css('right',($('#chat-wrapper').width()));
+                    $('#bottomcontent').css('width',($('#stream').width()));
+                    $('#bettors1, #bettors2').css('min-height',$("#sbettorswrapper").height());
+                }}
+                setAspectRatio();   
+                jQuery(window).resize(setAspectRatio);
+            }});
+            
+        </script>
+            <!-- Begin Footer -->
+        <div id="footer">
+            
+            <div class="footerleft">
+                <a href="/logout">Logout</a>            </div>
+            
+            <div class="footerright">
+                <a href="https://www.saltybet.com/about" target="_blank">FAQ</a>
+            </div>
+            
+            <div class="footercenter">
+                <div class="dynamic-view" style="display:none;">
+                    <div id="bet-table">
+                    <div class="tablecell"><button id="interval1" name="interval1" type="button" value="0" class="button-purple">10%</button></div><div class="tablecell"><button id="interval2" name="interval2" type="button" value="0" class="button-purple">20%</button></div><div class="tablecell"><button id="interval3" name="interval3" type="button" value="0" class="button-purple">30%</button></div><div class="tablecell"><button id="interval4" name="interval4" type="button" value="0" class="button-purple">40%</button></div><div class="tablecell"><button id="interval5" name="interval5" type="button" value="0" class="button-purple">50%</button></div><div class="tablecell"><button id="interval6" name="interval6" type="button" value="0" class="button-purple">60%</button></div><div class="tablecell"><button id="interval7" name="interval7" type="button" value="0" class="button-purple">70%</button></div><div class="tablecell"><button id="interval8" name="interval8" type="button" value="0" class="button-purple">80%</button></div><div class="tablecell"><button id="interval9" name="interval9" type="button" value="0" class="button-purple">90%</button></div>                            <div class="tablecell"><button id="interval10" name="interval10" type="button" value="0" class="button-purple"/><span style="line-height: 35px;vertical-align:top; font-size: 9px;">ALL IN! </span><img src="images/SALT.png"/></div>
+                        </div>
+                </div>
+
+                                
+                <div id="footer-alert" class="purpletext alerttext"></div>
+                <a href="https://www.saltybet.com/illuminati" target="_blank" class="alerttext"><span class="goldtext">Get Salty Gold!</span></a>            </div>
+
+        </div> <!-- End Footer -->
+        </div> <!-- End Wrapper -->
+        <script type="text/javascript">
+            
+            
+                           
+            $(document).ready(function () {{
+                
+                $('[data-toggle="tooltip"]').tooltip();
+                dark();                $( "#content" ).fadeIn(  function() {{
+                }});
+                $( "#loadgif" ).fadeOut( "slow", function() {{ 
+                }});
+                
+                            }});
+        </script>
+        </body>
+        </html>
+        

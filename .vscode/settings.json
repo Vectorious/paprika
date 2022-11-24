@@ -1,0 +1,19 @@
+{
+    "files.associations": {
+        "xstring": "cpp",
+        "xutility": "cpp",
+        "memory": "cpp",
+        "algorithm": "cpp",
+        "bit": "cpp",
+        "type_traits": "cpp",
+        "xtr1common": "cpp",
+        "iterator": "cpp",
+        "utility": "cpp",
+        "compare": "cpp",
+        "tuple": "cpp",
+        "xmemory": "cpp",
+        "cmath": "cpp",
+        "string": "cpp"
+    },
+    "cmake.configureOnOpen": false
+}
