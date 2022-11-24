@@ -8,6 +8,7 @@ Bugs
 
 TODO
 ====
+- Add maximum manual wager to config, to set a maximum for the manual wager slider.
 - Consider adding auto-update.
 - Add formatting to LogWrite function.
     - Consider adding separator commas here.

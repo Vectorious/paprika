@@ -252,6 +252,8 @@ MatchWindow(Paprika_State *paprika, Current_Match_Window *match_window)
         ImGui::EndChild();
 
         ImGui::TextUnformatted(paprika->state.remaining);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("%s", paprika->state.remaining);
     }
     ImGui::End();
 }
