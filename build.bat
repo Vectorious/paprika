@@ -26,7 +26,7 @@ del *.pdb
 del *.exp
 del *.lib
 
-set RELEASE_BUILD=1
+set RELEASE_BUILD=0
 set USE_EMU=1
 
 IF %RELEASE_BUILD%==0 (

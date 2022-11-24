@@ -34,6 +34,8 @@ PlayerFrame(ImGuiID id, f32 width, char *name, i16 rank, u32 confidence, u32 pre
     if (ImGui::BeginChild(id, ImVec2(width, 102.0f), true, ImGuiWindowFlags_NoScrollbar))
     {
         ImGui::Text("%s", name);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("%s", name);
         ImGui::Separator();
         ImGui::Text("%d", rank);
         ImGui::Text("%u%%", confidence);

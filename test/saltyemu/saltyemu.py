@@ -80,7 +80,7 @@ class SaltyMatch:
 class SaltyBetState:
     def __init__(self):
         self.player = Player("4204924", "testuser420", 420000)
-        self.characters = ["Brandon", "Hayley", "Palace", "Parky", "Jacob", "Chelsea", "Yigs", "Spatnack"]
+        self.characters = ["Brandon", "Hayley", "Palace", "Parky", "Jacob", "Chelsea", "Yigs", "Spatnack", "Long name person mvc ssj+"]
         self.gamemode = Gamemode.matchmaking
         self.remaining = gamemode_count(self.gamemode)
         self.randomize_match()
