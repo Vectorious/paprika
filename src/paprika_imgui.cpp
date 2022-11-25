@@ -490,7 +490,9 @@ ConfigWindow(Paprika_State *paprika, Config_Window *config_window)
     {
         ImGui::InputText("Username", config_window->edit_config.username, sizeof(config_window->edit_config.username));
         ImGui::InputText("Password", config_window->edit_config.password, sizeof(config_window->edit_config.password), ImGuiInputTextFlags_Password);
-        ImGui::InputScalar("Maximum manual wager", ImGuiDataType_S64, &config_window->edit_config.maximum_manual_wager);
+        if (ImGui::InputScalar("Maximum manual wager", ImGuiDataType_U64, &config_window->edit_config.maximum_manual_wager))
+            config_window->edit_config.maximum_manual_wager = Clamp(config_window->edit_config.maximum_manual_wager, 0, MAX_I64);
+
         if (ImGui::Button("Save"))
         {
             paprika->config = config_window->edit_config;

@@ -30,6 +30,7 @@ typedef size_t mem_t;
 #endif
 
 #define MAX_U64 0xFFFFFFFFFFFFFFFF
+#define MAX_I64 0x7FFFFFFFFFFFFFFF
 #define MAX_U32 0xFFFFFFFF
 #define MAX_I32 0x7FFFFFFF
 #define MAX_U16 0xFFFF
