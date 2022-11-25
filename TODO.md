@@ -1,9 +1,5 @@
-paprikabot2 Notes
-
 Bugs
 ====
-[ ] : Not fixed.
-[o] : Unconfirmed fixed.
 
 
 TODO
