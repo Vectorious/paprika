@@ -530,10 +530,21 @@ SaveNodeSystems(Paprika_Platform *platform, Node_Systems *node_systems)
     return file.handle != 0;
 }
 
+internal Paprika_Config
+DefaultConfig()
+{
+    Paprika_Config config = {};
+
+    config.maximum_manual_wager = 100000;
+
+    return config;
+}
+
+
 internal bool32
 LoadConfig(Paprika_Platform *platform, Json_Reader *reader, Paprika_Config *config)
 {
-    *config = {};
+    *config = DefaultConfig();
 
     Read_File_Result file = platform->ReadFile("config.json");
     if (file.size)
@@ -549,6 +560,8 @@ LoadConfig(Paprika_Platform *platform, Json_Reader *reader, Paprika_Config *conf
                 StringCopy(entry->value.str, config->username);
             else if (StringCmp(entry->name, "password"))
                 StringCopy(entry->value.str, config->password);
+            else if (StringCmp(entry->name, "maximum_manual_wager"))
+                config->maximum_manual_wager = entry->value.num.i;
             else
                 Panic("Invalid config entry.");
 
@@ -568,11 +581,18 @@ LoadConfig(Paprika_Platform *platform, Json_Reader *reader, Paprika_Config *conf
 internal bool32
 SaveConfig(Paprika_Platform *platform, Json_Writer *writer, Paprika_Config *config)
 {
+    Json_Object_Entry maximum_manual_wager_entry;
+    maximum_manual_wager_entry.name = "maximum_manual_wager";
+    maximum_manual_wager_entry.value.type = JsonType_Num;
+    maximum_manual_wager_entry.value.num.type = JsonNumType_Int;
+    maximum_manual_wager_entry.value.num.i = config->maximum_manual_wager;
+    maximum_manual_wager_entry.next = 0;
+
     Json_Object_Entry password_entry;
     password_entry.name = "password";
     password_entry.value.type = JsonType_String;
     password_entry.value.str = config->password;
-    password_entry.next = 0;
+    password_entry.next = &maximum_manual_wager_entry;
 
     Json_Object_Entry username_entry;
     username_entry.name = "username";

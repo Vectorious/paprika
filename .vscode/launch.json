@@ -5,6 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "(Windows) Launch Test",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/test/bin/paprika_win32.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/test/bin",
+            "environment": [],
+            "console": "integratedTerminal",
+            "requireExactSource": false
+        },
+        {
             "name": "(Windows) Launch",
             "type": "cppvsdbg",
             "request": "launch",

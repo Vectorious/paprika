@@ -21,10 +21,6 @@ set WARNINGS="-Weverything -Wno-writable-strings -Wno-unused-function -Wno-missi
 set RANDOM_VAL="%RANDOM%"
 
 
-del *.pdb
-del *.exp
-del *.lib
-
 set RELEASE_BUILD=0
 set USE_EMU=1
 
@@ -35,24 +31,30 @@ IF %RELEASE_BUILD%==0 (
         mkdir bin 2>nul
         pushd bin
 
-        clang-cl "%WARNINGS%" "%COMMON_CL%" "%INTERNAL%" -DCURL_STATICLIB -Fmpaprika.map ../src/paprika.cpp -LD -link -libpath:../lib -incremental:no -PDB:paprika-%RANDOM_VAL%.pdb -nodefaultlib:LIBCMTD -OUT:paprika_build.dll && move paprika_build.dll paprika.dll >nul
+        del *.pdb
+
+        clang-cl "%WARNINGS%" "%COMMON_CL%" "%INTERNAL%" -DCURL_STATICLIB -Fmpaprika.map ../src/paprika.cpp -LD -link -noimplib -noexp -libpath:../lib -incremental:no -PDB:paprika-%RANDOM_VAL%.pdb -nodefaultlib:LIBCMTD -OUT:paprika_build.dll && move paprika_build.dll paprika.dll >nul
         clang-cl "%WARNINGS%" "%COMMON_CL%" "%INTERNAL%" -Fmpaprika_win32.map -DCURL_STATICLIB ../src/paprika_win32.cpp -link "%CL_WIN32_INCLUDE%" "%CL_CURL_INCLUDE%" -libpath:../lib -incremental:no -nodefaultlib:LIBCMTD -nodefaultlib:LIBCMT -OUT:paprika_win32.exe
     ) else (
         echo Building in test mode...
 
-        mkdir test/bin 2>nul
-        pushd test/bin
+        mkdir test\bin 2>nul
+        pushd test
 
-        clang-cl "%WARNINGS%" "%COMMON_CL%" "%INTERNAL%" -DUSE_EMU -DCURL_STATICLIB -Fmpaprika.map ../src/paprika.cpp -LD -link -libpath:../lib -incremental:no -PDB:paprika-%RANDOM_VAL%.pdb -nodefaultlib:LIBCMTD -OUT:paprika_build.dll && move paprika_build.dll paprika.dll >nul
-        clang-cl "%WARNINGS%" "%COMMON_CL%" "%INTERNAL%" -DUSE_EMU -Fmpaprika_win32.map -DCURL_STATICLIB ../src/paprika_win32.cpp -link "%CL_WIN32_INCLUDE%" "%CL_CURL_INCLUDE%" -libpath:../lib -incremental:no -nodefaultlib:LIBCMTD -nodefaultlib:LIBCMT -OUT:paprika_win32.exe
+        del bin\*.pdb
+
+        clang-cl "%WARNINGS%" "%COMMON_CL%" "%INTERNAL%" -DUSE_EMU -DCURL_STATICLIB -Fmpaprika.map ../src/paprika.cpp -LD -link -noimplib -noexp -libpath:../lib -incremental:no -PDB:bin/paprika-%RANDOM_VAL%.pdb -nodefaultlib:LIBCMTD -OUT:paprika_build.dll && move paprika_build.dll bin/paprika.dll >nul
+        clang-cl "%WARNINGS%" "%COMMON_CL%" "%INTERNAL%" -DUSE_EMU -Fmpaprika_win32.map -DCURL_STATICLIB ../src/paprika_win32.cpp -link "%CL_WIN32_INCLUDE%" "%CL_CURL_INCLUDE%" -libpath:../lib -incremental:no -nodefaultlib:LIBCMTD -nodefaultlib:LIBCMT -OUT:bin/paprika_win32.exe
     )
 ) else (
     echo Building in release mode...
 
-    mkdir bin/release 2>nul
-    pushd bin/release
+    mkdir bin\release 2>nul
+    pushd bin
 
-    clang-cl "%WARNINGS%" "%COMMON_CL%" "%RELEASE%" -Fmpaprika_win32.map -DCURL_STATICLIB ../src/paprika_win32.cpp -link -subsystem:WINDOWS "%CL_WIN32_INCLUDE%" "%RELEASE_CL_STATIC_INCLUDE%" -libpath:../lib -incremental:no -OUT:paprika_win32.exe
+    del release\*.pdb
+
+    clang-cl "%WARNINGS%" "%COMMON_CL%" "%RELEASE%" -Fmpaprika_win32.map -DCURL_STATICLIB ../src/paprika_win32.cpp -link -subsystem:WINDOWS "%CL_WIN32_INCLUDE%" "%RELEASE_CL_STATIC_INCLUDE%" -libpath:../lib -incremental:no -OUT:release/paprika_win32.exe
 )
 
 popd

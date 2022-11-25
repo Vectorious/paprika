@@ -201,8 +201,9 @@ MatchWindow(Paprika_State *paprika, Current_Match_Window *match_window)
             ImGui::SameLine();
 
             const i64 zero = 0;
+            i64 max_wager = Min(comparison.balance, paprika->config.maximum_manual_wager);
             ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-            ImGui::SliderScalar("##Wager", ImGuiDataType_S64, &match_window->wager, &zero, &comparison.balance, "$%lld");
+            ImGui::SliderScalar("##Wager", ImGuiDataType_S64, &match_window->wager, &zero, &max_wager, "$%lld");
         }
         else
         {
@@ -485,11 +486,11 @@ LogWindow(Paprika_State *paprika, Log_Window *log_window)
 internal void
 ConfigWindow(Paprika_State *paprika, Config_Window *config_window)
 {
-    ImGui::SetNextWindowSizeConstraints(ImVec2(328, 100), ImVec2(1920, 100));
-    if (ImGui::Begin("Configuration", &config_window->active))
+    if (ImGui::Begin("Configuration", &config_window->active, ImGuiWindowFlags_AlwaysAutoResize))
     {
         ImGui::InputText("Username", config_window->edit_config.username, sizeof(config_window->edit_config.username));
         ImGui::InputText("Password", config_window->edit_config.password, sizeof(config_window->edit_config.password), ImGuiInputTextFlags_Password);
+        ImGui::InputScalar("Maximum manual wager", ImGuiDataType_S64, &config_window->edit_config.maximum_manual_wager);
         if (ImGui::Button("Save"))
         {
             paprika->config = config_window->edit_config;

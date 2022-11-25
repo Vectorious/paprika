@@ -341,6 +341,7 @@ struct Paprika_Config
 {
     char username[64];
     char password[64];
+    i64 maximum_manual_wager;
 };
 
 internal inline Node_System *
