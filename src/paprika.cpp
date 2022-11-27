@@ -1320,15 +1320,18 @@ EXPORT_FUNC PaprikaUpdateFunction(PaprikaUpdate)
             Character *red = GetOrAddCharacter(&paprika->mm.characters, paprika->state.p1name);
             Character *blue = GetOrAddCharacter(&paprika->mm.characters, paprika->state.p2name);
 
-            Match current_match = {};
-            current_match.player1id = red->id;
-            current_match.player2id = blue->id;
-            current_match.gamemode = paprika->state.mode;
+            Match *match = &paprika->current_match;
+            match->player1id = red->id;
+            match->player2id = blue->id;
+            match->gamemode = paprika->state.mode;
+            match->player1total = 0;
+            match->player2total = 0;
 
-            paprika->current_match = current_match;
             paprika->current_match_comparison =
                 GetMatchupComparison(&paprika->mm,
                                      red, blue, paprika->player.balance, paprika->state.mode);
+
+            paprika->current_match_completion = MatchCompletion_Open;
 
             Node_System_ID active_strategy = GetActiveNodeSystemID(&paprika->node_systems, paprika->state.mode);
             Node_System *node_system = GetNodeSystem(&paprika->node_systems, active_strategy);
@@ -1377,8 +1380,15 @@ EXPORT_FUNC PaprikaUpdateFunction(PaprikaUpdate)
 
                         if (StringCmp(paprika->zdata.state.status, "locked"))
                         {
-                            paprika->current_match.player1total = paprika->zdata.state.p1total;
-                            paprika->current_match.player2total = paprika->zdata.state.p2total;
+                            Match *match = &paprika->current_match;
+                            match->player1id = GetOrAddCharacter(&paprika->mm.characters, paprika->zdata.state.p1name)->id;
+                            match->player2id = GetOrAddCharacter(&paprika->mm.characters, paprika->zdata.state.p2name)->id;
+                            match->player1total = paprika->zdata.state.p1total;
+                            match->player2total = paprika->zdata.state.p2total;
+                            match->gamemode = paprika->zdata.state.mode;
+                            
+                            paprika->current_match_completion = MatchCompletion_Locked;
+
                             ChangeMode(paprika, PaprikaMode_Await_Result); 
                         }
                     }
@@ -1433,20 +1443,26 @@ EXPORT_FUNC PaprikaUpdateFunction(PaprikaUpdate)
                             paprika->player.balance = paprika->zdata.balance;
                         }
 
-                        Match match = paprika->current_match;
-                        match.timestamp = (u32)args[0].num;
-                        match.player1total = paprika->zdata.state.p1total;
-                        match.player2total = paprika->zdata.state.p2total;
-                        match.winner = *paprika->zdata.state.status == '1' ? 0 : 1;
-                        ProcessMatch(&paprika->mm.characters, &match);
-                        Match_ID match_id = AddMatch(&paprika->mm.matches, match);
+                        Match *match = &paprika->current_match;
+                        match->player1id = GetOrAddCharacter(&paprika->mm.characters, paprika->zdata.state.p1name)->id;
+                        match->player2id = GetOrAddCharacter(&paprika->mm.characters, paprika->zdata.state.p2name)->id;
+                        match->player1total = paprika->zdata.state.p1total;
+                        match->player2total = paprika->zdata.state.p2total;
+                        match->timestamp = (u32)args[0].num;
+                        match->winner = *paprika->zdata.state.status == '1' ? 0 : 1;
+                        match->gamemode = paprika->zdata.state.mode;
+
+                        paprika->current_match_completion = MatchCompletion_Complete;
+
+                        ProcessMatch(&paprika->mm.characters, match);
+                        Match_ID match_id = AddMatch(&paprika->mm.matches, *match);
                         
                         Matchup_Frame matchup_frame = {};
                         matchup_frame.match_id = match_id;
                         matchup_frame.comparison = paprika->current_match_comparison;
 
                         Match_Wager match_wager = {};
-                        match_wager.timestamp = match.timestamp;
+                        match_wager.timestamp = match->timestamp;
                         match_wager.open_balance = open_balance;
                         match_wager.close_balance = paprika->player.balance;
                         match_wager.wager = paprika->zdata.wager;

@@ -395,6 +395,14 @@ struct Player_Info
     char user_id[11];
 };
 
+enum MatchCompletion
+{
+    MatchCompletion_None,
+    MatchCompletion_Open,
+    MatchCompletion_Locked,
+    MatchCompletion_Complete,
+};
+
 
 #include "paprika_imgui.h"
 
@@ -411,6 +419,7 @@ struct Paprika_State
     Salt_Zdata zdata;
 
     Player_Info player;
+    MatchCompletion current_match_completion;
     Match current_match;
     Matchup_Comparison current_match_comparison;
 

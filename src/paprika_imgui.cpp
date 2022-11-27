@@ -205,11 +205,28 @@ MatchWindow(Paprika_State *paprika, Current_Match_Window *match_window)
             ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
             ImGui::SliderScalar("##Wager", ImGuiDataType_S64, &match_window->wager, &zero, &max_wager, "$%lld");
         }
-        else
+        else if (paprika->current_match_completion >= MatchCompletion_Locked)
         {
             PlayerTotals(match);
 
-            if (paprika->mode == PaprikaMode_Await_Open && paprika->current_match.gamemode)
+            if (paprika->current_match_completion == MatchCompletion_Locked && paprika->zdata.wager)
+            {
+                i64 projected_winnings;
+                char *wager_name;
+                if (paprika->zdata.player == 1)
+                {
+                    projected_winnings = ceil(((f64)paprika->zdata.wager / match.player1total) * match.player2total);
+                    wager_name = GetCharacterName(&paprika->mm.characters, red->name_offset);
+                }
+                else
+                {
+                    projected_winnings = ceil(((f64)paprika->zdata.wager / match.player2total) * match.player1total);
+                    wager_name = GetCharacterName(&paprika->mm.characters, blue->name_offset);
+                }
+            
+                ImGui::Text("Wager: '%s' ($%lld -> $%lld)", wager_name, paprika->zdata.wager, projected_winnings);
+            }
+            else if (paprika->current_match_completion == MatchCompletion_Complete)
             {
                 Arena_Offset winner_offset = match.winner ? blue->name_offset : red->name_offset;
                 ImGui::Text("'%s' wins!", GetCharacterName(&paprika->mm.characters, winner_offset));
@@ -232,23 +249,7 @@ MatchWindow(Paprika_State *paprika, Current_Match_Window *match_window)
                     ImGui::PopStyleColor();
                 }
             }
-            else if (paprika->zdata.wager)
-            {
-                i64 projected_winnings;
-                char *wager_name;
-                if (paprika->zdata.player == 1)
-                {
-                    projected_winnings = ceil(((f64)paprika->zdata.wager / match.player1total) * match.player2total);
-                    wager_name = GetCharacterName(&paprika->mm.characters, red->name_offset);
-                }
-                else
-                {
-                    projected_winnings = ceil(((f64)paprika->zdata.wager / match.player2total) * match.player1total);
-                    wager_name = GetCharacterName(&paprika->mm.characters, blue->name_offset);
-                }
-            
-                ImGui::Text("Wager: '%s' ($%lld -> $%lld)", wager_name, paprika->zdata.wager, projected_winnings);
-            }
+
         }
         ImGui::EndChild();
 

@@ -4,13 +4,17 @@ Bugs
 
 TODO
 ====
-- Add maximum manual wager to config, to set a maximum for the manual wager slider.
+- Display match result (if available) in `Current Match` window when bot is disabled.
+- Add saving to a temp file and replacing the original when saving match data.
+- Add way to open windows on launch.
+- Consider switching to docking branch of Dear ImGui.
 - Consider adding auto-update.
 - Add formatting to LogWrite function.
     - Consider adding separator commas here.
 - Refactor `Paprika_Input`.
 - Improve matchup history system.
     - Probably have entire matchup history loaded, but plot uses a dynamic window into it.
+- Add Salty Bet chat support. Pretty sure this is just Twitch chat (IRC?).
 
 Security
 --------
@@ -50,3 +54,4 @@ Visuals
 - Glass balls (see `visuals.png`) are lowered into a pit (or pits) during betting phase, and are lifted when bets are locked.
 - Glass balls fall and shatter into physics-activated shards.
 - Show matchup details (see `matchup.png`) on a virtual screen.
+- Salty Bet livestream visible.
