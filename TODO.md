@@ -5,7 +5,6 @@ Bugs
 TODO
 ====
 - Draw lines behind nodes.
-- Add ability to clone strategies.
 - Display match result (if available) in `Current Match` window when bot is disabled.
 - Add saving to a temp file and replacing the original when saving match data.
 - Add way to open windows on launch.

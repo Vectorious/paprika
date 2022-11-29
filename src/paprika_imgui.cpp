@@ -328,6 +328,27 @@ StrategiesWindow(Paprika_State *paprika, Strategies_Window *strategies_window)
                     if (ImGui::MenuItem("Rename"))
                         strategies_window->renaming_system = ns_id;
                     
+                    if (ImGui::MenuItem("Clone"))
+                    {
+                        Node_System *clone = GetNodeSystem(node_systems, AddNodeSystem(node_systems));
+                        *clone = *node_system;
+                        char *clone_text = "Clone of ";
+                        mem_t clone_text_len = 9;
+                        mem_t remaining_len = ArrayCount(clone->name) - clone_text_len;
+                        StringCopy(clone_text, clone->name, false);
+                        if (StringLength(clone->name) <= remaining_len)
+                        {
+                            StringCopy(node_system->name, clone->name + clone_text_len);
+                        }
+                        else
+                        {
+                            MemCopy(node_system->name,
+                                    clone->name + clone_text_len,
+                                    remaining_len);
+                            clone->name[ArrayCount(clone->name) - 1] = '\0';
+                        }
+                    }
+                    
                     if (ImGui::MenuItem("Delete"))
                         open_delete_popup = true;
 

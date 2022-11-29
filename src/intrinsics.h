@@ -237,11 +237,13 @@ StringToF64(char *start, char *end = 0)
 }
 
 internal inline void
-StringCopy(char *src, char *dst)
+StringCopy(char *src, char *dst, bool32 null_terminator = true)
 {
     while (*src)
     {
         *dst++ = *src++;
     }
-    *dst = '\0';
+
+    if (null_terminator)
+        *dst = '\0';
 }
