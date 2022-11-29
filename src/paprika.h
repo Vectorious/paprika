@@ -251,7 +251,7 @@ struct Matchup_History
 {
     mem_t count;
     mem_t write_index;
-    Matchup_Frame matchup_frames[100];
+    Matchup_Frame matchup_frames[256];
 };
 
 

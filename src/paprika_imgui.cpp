@@ -705,7 +705,7 @@ HistoryWindow(Paprika_State *paprika, History_Window *history_Window)
                 y_focus = (f64)matchup_frames[paprika->history.count - 1].wager.close_balance;
             f64 y_min = Max(y_focus - 25000, 0);
 
-            ImPlot::SetupAxisLimits(ImAxis_X1, 0, 100, ImPlotCond_Always);
+            ImPlot::SetupAxisLimits(ImAxis_X1, 0, ArrayCount(paprika->history.matchup_frames), ImPlotCond_Always);
             ImPlot::SetupAxisLimits(ImAxis_Y1, y_min, y_min + 50000);
 
             ImPlot::SetupAxes(0, "Balance",
