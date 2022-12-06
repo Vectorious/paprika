@@ -4,6 +4,7 @@ Bugs
 
 TODO
 ====
+- Add unique calculations for Team games in exhibition.
 - Draw lines behind nodes.
 - Display match result (if available) in `Current Match` window when bot is disabled.
 - Add saving to a temp file and replacing the original when saving match data.
